@@ -1,0 +1,517 @@
+/* === Variables & Base === */
+:root {
+  --color-bg: #FFF8F0;
+  --color-primary: #D4845A;
+  --color-secondary: #C4887B;
+  --color-accent: #E8B86D;
+  --color-text: #4A3728;
+  --color-card-bg: #FFFAF5;
+  --font-display: 'Caveat', 'Ma Shan Zheng', cursive;
+  --font-serif: 'Cormorant Garamond', 'ZCOOL XiaoWei', serif;
+  --font-cn: 'Ma Shan Zheng', 'Long Cang', cursive;
+  --font-hand: 'Caveat', cursive;
+  --font-body: 'ZCOOL XiaoWei', 'Cormorant Garamond', serif;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+/* === Hero === */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero h1 {
+  font-family: 'Ma Shan Zheng', var(--font-display);
+  font-size: clamp(3rem, 10vw, 6rem);
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  z-index: 1;
+}
+
+.hero p {
+  font-family: var(--font-hand);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--color-secondary);
+  z-index: 1;
+}
+
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* === Sections === */
+section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+#gifts {
+  max-width: 100%;
+  padding: 4rem 2rem;
+}
+
+.section-title {
+  text-align: center;
+  font-family: 'Ma Shan Zheng', var(--font-display);
+  font-size: 2.2rem;
+  color: var(--color-primary);
+  margin-bottom: 2.5rem;
+}
+
+/* === Gift Cards - 开奖 Row === */
+.gifts-grid {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 1.5rem 0 2.5rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.gift-card {
+  perspective: 1000px;
+  min-width: 240px;
+  max-width: 260px;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+}
+
+.gift-card-inner {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.gift-card.unlocked .gift-card-inner {
+  transform: rotateY(180deg);
+}
+
+.gift-card-front,
+.gift-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Front: mystery / locked state */
+.gift-card-front {
+  background: linear-gradient(155deg, #3A2A1C, #5C3D28 40%, #4A3728);
+  box-shadow: 0 10px 40px rgba(74, 55, 40, 0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(232, 184, 109, 0.25);
+}
+
+.gift-card-front::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(232, 184, 109, 0.15);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.gift-number {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  opacity: 0.7;
+}
+
+.gift-mystery {
+  font-family: 'Dancing Script', var(--font-display);
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  text-shadow: 0 0 30px rgba(232, 184, 109, 0.5), 0 0 60px rgba(232, 184, 109, 0.2);
+  margin-bottom: 1.5rem;
+  animation: giftPulse 2s ease-in-out infinite;
+}
+
+@keyframes giftPulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+.gift-card-front input {
+  width: 85%;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(232, 184, 109, 0.4);
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  text-align: center;
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.gift-card-front input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.gift-card-front input:focus {
+  border-color: var(--color-accent);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 12px rgba(232, 184, 109, 0.2);
+}
+
+.gift-card-front .hint {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 0.6rem;
+}
+
+.gift-card-front .error-msg {
+  font-size: 0.75rem;
+  color: #e74c3c;
+  margin-top: 0.3rem;
+  min-height: 1em;
+}
+
+/* Back: revealed state */
+.gift-card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(145deg, var(--color-card-bg), #fff);
+  box-shadow: 0 6px 30px rgba(232, 184, 109, 0.3), 0 0 0 1px rgba(232, 184, 109, 0.2);
+  border: 1px solid rgba(232, 184, 109, 0.3);
+}
+
+.gift-reveal-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 0.8rem;
+  animation: revealBounce 0.6s ease;
+}
+
+@keyframes revealBounce {
+  0% { transform: scale(0) rotate(-20deg); }
+  60% { transform: scale(1.3) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.gift-card-back h3 {
+  font-family: 'Ma Shan Zheng', var(--font-cn);
+  color: var(--color-primary);
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.gift-card-back p {
+  font-family: 'Long Cang', var(--font-cn);
+  font-size: 1.05rem;
+  color: var(--color-text);
+  line-height: 1.6;
+  padding: 0 0.5rem;
+}
+
+/* === Gallery === */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.gallery-grid img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 24px rgba(74, 55, 40, 0.15);
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+}
+
+/* === Letter === */
+.letter-section {
+  text-align: center;
+}
+
+.letter-box {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--color-card-bg);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 4px 20px rgba(74, 55, 40, 0.1);
+  font-family: 'Long Cang', 'Ma Shan Zheng', cursive;
+  font-size: 1.25rem;
+  line-height: 2.2;
+  position: relative;
+}
+
+.letter-box::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.2rem;
+  left: 1rem;
+  font-size: 4rem;
+  color: var(--color-accent);
+  opacity: 0.4;
+  font-family: var(--font-serif);
+}
+
+.letter-signature {
+  text-align: right;
+  margin-top: 1.5rem;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+  color: var(--color-secondary);
+}
+
+/* === Game CTA === */
+.game-cta {
+  text-align: center;
+}
+
+.cta-card {
+  display: inline-block;
+  background: var(--color-card-bg);
+  border-radius: 16px;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 4px 20px rgba(74, 55, 40, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.cta-card:hover {
+  transform: translateY(-4px);
+}
+
+.cta-card h3 {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.cta-card p {
+  color: var(--color-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.cta-btn {
+  display: inline-block;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-family: 'Dancing Script', var(--font-display);
+  font-size: 1.2rem;
+  transition: background 0.3s ease;
+}
+
+.cta-btn:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* === Footer === */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--color-secondary);
+  font-size: 0.85rem;
+}
+
+/* === Music Toggle === */
+.music-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  background: var(--color-card-bg);
+  color: var(--color-primary);
+  font-size: 1.3rem;
+  cursor: pointer;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.music-toggle:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* === Floating Balloons === */
+.balloon {
+  position: fixed;
+  font-size: 2rem;
+  animation: floatUp linear infinite;
+  opacity: 0.6;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-10vh) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+/* === Sparkles === */
+.sparkle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  animation: sparkle 2s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* === Scroll Fade-in === */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .gifts-grid {
+    justify-content: flex-start;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .gift-card {
+    min-width: 200px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  .letter-box {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .cta-card {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  section {
+    padding: 3rem 1rem;
+  }
+
+  .gift-card {
+    min-width: 180px;
+  }
+
+  .gift-card-inner {
+    height: 320px;
+  }
+}

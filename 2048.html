@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2048 - Birthday Edition 🎂</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="2048.css">
+</head>
+<body>
+  <div class="game-wrapper">
+    <header class="game-header">
+      <a href="index.html" class="back-link">← Back to Birthday</a>
+      <h1>2048 <span class="subtitle">Birthday Edition</span></h1>
+      <div class="scores">
+        <div class="score-box">
+          <span class="score-label">Score</span>
+          <span class="score-value" id="score">0</span>
+        </div>
+        <div class="score-box">
+          <span class="score-label">Best</span>
+          <span class="score-value" id="best-score">0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="game-controls">
+      <button class="game-btn" id="new-game-btn">New Game</button>
+      <p class="game-instructions">Use arrow keys or swipe to play</p>
+    </div>
+
+    <div class="game-message-container" id="game-message" style="display:none;">
+      <div class="game-message-inner">
+        <p class="game-message-text" id="game-message-text"></p>
+        <button class="game-btn" id="message-btn">Try Again</button>
+      </div>
+    </div>
+
+    <div class="grid-container" id="grid-container">
+      <div class="grid-bg">
+        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+      </div>
+      <div class="tile-container" id="tile-container"></div>
+    </div>
+  </div>
+
+  <script src="2048.js"></script>
+</body>
+</html>

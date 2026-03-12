@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生日快乐, 豆!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Section 1: Hero -->
+  <header class="hero">
+    <h1>生日快乐, 豆!</h1>
+    <p>Wishing you the sweetest year ahead</p>
+  </header>
+
+  <!-- Section 2: Gifts -->
+  <section id="gifts">
+    <h2 class="section-title fade-in">🎁 开奖时间</h2>
+    <div class="gifts-grid" id="gifts-grid">
+      <!-- Gift cards injected by app.js -->
+    </div>
+  </section>
+
+  <!-- Letter section (hidden for now)
+  <section id="letter" class="letter-section">
+    <h2 class="section-title fade-in">💌 A Letter for You</h2>
+    <div class="letter-box fade-in">
+      <p>
+        亲爱的豆，<br><br>
+        Happy birthday! This is a placeholder for your heartfelt letter.
+        <br><br>
+        Every day with you is a gift.
+      </p>
+      <p class="letter-signature">— 永远爱你的人</p>
+    </div>
+  </section>
+  -->
+
+  <!-- 2048 Game CTA -->
+  <section id="game" class="game-cta">
+    <div class="cta-card fade-in">
+      <h3>🎮 来玩呀 客官</h3>
+      <a href="2048.html" class="cta-btn">Play 2048</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Made with ❤️ for 豆</p>
+  </footer>
+
+  <!-- Music Toggle -->
+  <button class="music-toggle" id="music-toggle" title="Toggle music">🔇</button>
+  <audio id="bg-music" loop preload="none">
+    <source src="music/birthday.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Enlarged photo" id="lightbox-img">
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
