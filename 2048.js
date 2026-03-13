@@ -438,8 +438,7 @@
 
             self.score += merged.value;
 
-            // TODO: change back to 2048 after testing
-            if (merged.value === 64) self.won = true;
+            if (merged.value === 2048) self.won = true;
           } else {
             self.moveTile(tile, positions.farthest);
           }

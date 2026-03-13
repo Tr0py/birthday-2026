@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Dinner Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --gold: #b8922a;
+    --gold-light: #d4a94a;
+    --gold-pale: #e8d5a3;
+    --cream: #f7f0e3;
+    --cream-dark: #ede3cc;
+    --burgundy: #6b1f2a;
+    --divider: #c9a96e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #2a1f14;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+
+  .page {
+    background: var(--cream);
+    width: 820px;
+    min-height: 1000px;
+    position: relative;
+    box-shadow:
+      0 0 0 1px #b8922a44,
+      0 0 40px rgba(0,0,0,0.6),
+      0 0 120px rgba(0,0,0,0.3);
+    animation: reveal 1.4s ease both;
+  }
+
+  @keyframes reveal {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Paper texture overlay */
+  .page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+  .inner {
+    position: relative;
+    z-index: 2;
+    padding: 65px 75px;
+  }
+
+  /* Decorative border */
+  .border-frame {
+    position: absolute;
+    inset: 16px;
+    border: 1px solid var(--divider);
+    pointer-events: none;
+    z-index: 3;
+  }
+  .border-frame::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 1px solid var(--gold-pale);
+    opacity: 0.5;
+  }
+
+  /* Corner ornaments */
+  .corner {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    z-index: 4;
+  }
+  .corner svg { width: 100%; height: 100%; }
+  .corner.tl { top: 10px; left: 10px; }
+  .corner.tr { top: 10px; right: 10px; transform: scaleX(-1); }
+  .corner.bl { bottom: 10px; left: 10px; transform: scaleY(-1); }
+  .corner.br { bottom: 10px; right: 10px; transform: scale(-1,-1); }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .occasion-script {
+    font-family: 'Great Vibes', cursive;
+    font-size: 25px;
+    color: var(--burgundy);
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .title-zh {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 21px;
+    font-weight: 400;
+    letter-spacing: 0.45em;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .divider-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 14px 0;
+  }
+  .divider-ornament .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--divider));
+    max-width: 100px;
+  }
+  .divider-ornament .line.right {
+    background: linear-gradient(to left, transparent, var(--divider));
+  }
+  .divider-ornament .diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  .date-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: #7a6040;
+    letter-spacing: 0.12em;
+  }
+
+  /* Section label */
+  .section-label {
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    font-weight: 400;
+    animation: fadeUp 1s 0.5s ease both;
+  }
+
+  /* Dish cards */
+  .dishes {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .dish {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--cream-dark);
+    animation: fadeUp 1s ease both;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .dish:nth-child(1) { animation-delay: 0.55s; }
+  .dish:nth-child(2) { animation-delay: 0.7s; }
+  .dish:nth-child(3) { animation-delay: 0.85s; }
+  .dish:nth-child(4) { animation-delay: 1.0s; border-bottom: none; }
+
+  .dish-number {
+    display: none;
+  }
+
+  .dish-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 5px;
+  }
+
+  .dish-title-row .dish-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 38px;
+    color: var(--gold-pale);
+    font-weight: 300;
+  }
+
+  .dish-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .dish-script {
+    font-family: 'Great Vibes', cursive;
+    font-size: 32px;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .dish-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #9a7850;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .dish-zh {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 20px;
+    color: #5c4a32;
+    letter-spacing: 0.15em;
+    display: block;
+    line-height: 1.7;
+  }
+
+  .dish-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: #b09a78;
+    letter-spacing: 0.05em;
+    margin-top: 5px;
+    display: block;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 34px;
+    text-align: center;
+    animation: fadeUp 1s 1.2s ease both;
+  }
+
+  .footer-script {
+    font-family: 'Great Vibes', cursive;
+    font-size: 28px;
+    color: var(--burgundy);
+    margin-bottom: 8px;
+  }
+
+  .footer-small {
+    font-size: 13px;
+    letter-spacing: 0.35em;
+    color: #9a8060;
+    text-transform: uppercase;
+  }
+
+  /* Heart accent */
+  .heart {
+    color: var(--burgundy);
+    font-size: 10px;
+    display: inline-block;
+    animation: heartbeat 2s 2s ease infinite;
+  }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="border-frame"></div>
+
+  <!-- Corner ornaments -->
+  <div class="corner tl">
+    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 26 L2 2 L26 2" stroke="#b8922a" stroke-width="1" fill="none"/>
+      <path d="M2 2 Q14 2 14 14" stroke="#b8922a" stroke-width="0.6" fill="none" opacity="0.5"/>
+      <circle cx="2" cy="2" r="2" fill="#b8922a"/>
+    </svg>
+  </div>
+  <div class="corner tr">
+    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 26 L2 2 L26 2" stroke="#b8922a" stroke-width="1" fill="none"/>
+      <path d="M2 2 Q14 2 14 14" stroke="#b8922a" stroke-width="0.6" fill="none" opacity="0.5"/>
+      <circle cx="2" cy="2" r="2" fill="#b8922a"/>
+    </svg>
+  </div>
+  <div class="corner bl">
+    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 26 L2 2 L26 2" stroke="#b8922a" stroke-width="1" fill="none"/>
+      <path d="M2 2 Q14 2 14 14" stroke="#b8922a" stroke-width="0.6" fill="none" opacity="0.5"/>
+      <circle cx="2" cy="2" r="2" fill="#b8922a"/>
+    </svg>
+  </div>
+  <div class="corner br">
+    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 26 L2 2 L26 2" stroke="#b8922a" stroke-width="1" fill="none"/>
+      <path d="M2 2 Q14 2 14 14" stroke="#b8922a" stroke-width="0.6" fill="none" opacity="0.5"/>
+      <circle cx="2" cy="2" r="2" fill="#b8922a"/>
+    </svg>
+  </div>
+
+  <div class="inner">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="occasion-script">A Birthday Dinner, Made with Love</div>
+      <div class="title-zh">生日晚宴</div>
+
+      <div class="divider-ornament">
+        <div class="line"></div>
+        <div class="diamond"></div>
+        <div class="diamond" style="opacity:0.5; margin: 0 -6px;"></div>
+        <div class="diamond"></div>
+        <div class="line right"></div>
+      </div>
+
+      <div class="date-line">
+        An Evening Curated Just for Dou
+      </div>
+    </div>
+
+    <div class="section-label">— The Menu —</div>
+
+    <!-- Dishes -->
+    <div class="dishes">
+
+      <div class="dish">
+        <div class="dish-content">
+          <div class="dish-title-row"><span class="dish-num">I</span><span class="dish-script">A Garden of Wellness</span></div>
+          <span class="dish-subtitle">Wok-Kissed Romaine with Fermented Black Bean Dace</span>
+          <span class="dish-zh">健康的豆豉鲮鱼油麦菜</span>
+          <span class="dish-note">Light, verdant, and full of quiet nourishment</span>
+        </div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-content">
+          <div class="dish-title-row"><span class="dish-num">II</span><span class="dish-script">Her Favourite</span></div>
+          <span class="dish-subtitle">Slow-Braised Chicken Wings, Tenderly Done</span>
+          <span class="dish-zh">某人最喜欢的慢炖鸡翅儿</span>
+          <span class="dish-note">Because some things never need to change</span>
+        </div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-content">
+          <div class="dish-title-row"><span class="dish-num">III</span><span class="dish-script">As the Little Love Wished</span></div>
+          <span class="dish-subtitle">Braised Abalone & Baby Potatoes, Unhurried</span>
+          <span class="dish-zh">小可爱叫着要吃的鲍鱼炖土豆</span>
+          <span class="dish-note">Requested with great enthusiasm, delivered with great care</span>
+        </div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-content">
+          <div class="dish-title-row"><span class="dish-num">IV</span><span class="dish-script">The Nourishing Soul</span></div>
+          <span class="dish-subtitle">Spare Rib Broth, Slowly Simmered & Deeply Warming</span>
+          <span class="dish-zh">超级养生的排骨汤</span>
+          <span class="dish-note">For good health, good years, and everything good ahead</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="divider-ornament" style="margin-bottom: 22px;">
+        <div class="line"></div>
+        <div class="diamond"></div>
+        <div class="line right"></div>
+      </div>
+      <div class="footer-script">Happy Birthday, my love</div>
+      <div class="footer-small" style="letter-spacing:0.2em; font-family:'Ma Shan Zheng',cursive; font-size:16px;">愿你新的一岁，快乐吃饭，想吃什么就吃什么</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

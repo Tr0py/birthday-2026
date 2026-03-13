@@ -10,8 +10,8 @@ const GIFTS = [
     name: '菌菇水',
     emoji: '🍄',
     hint: '小朋友最喜欢的什么东西呀',
-    // password: "gift1" (change hash when you set real passwords)
-    hash: 'db1dd1c7f6cc489c69e4c1f52a1819527a0144e1a41a0e6794082e3c8d498b78',
+    // password: "FJZ2G"
+    hash: '3feaf79adb84502d38c47b0ae78c922cea90d45572153418c3af37d5e374a455',
     content: '🍄 给我们的小豆最喜欢的呲呲呀 这次要大份一点!'
   },
   {
@@ -39,12 +39,13 @@ const GIFTS = [
     content: '🍰 一起享受美味的LadyM蛋糕吧~'
   },
   {
-    name: '菜单',
-    emoji: '📋',
+    name: '生日晚宴',
+    emoji: '🍽️',
     hint: '和...好吃的？',
-    // password: "gift5"
-    hash: 'b0e6b0dbb0e78e1e2e0a3e7d0dd55e323c6fdf4c0c6e8f0d9b5e7a1d3c2b4a56',
-    content: '📋 一份特别的自制晚餐菜单，用心制作！'
+    // password: "mylove"
+    hash: 'fac445f594a545116747701d3a307109432735698cabeebf65f09ac5d343d78b',
+    content: '🍽️ 点击查看你的专属晚宴菜单！',
+    link: 'menu.html'
   }
 ];
 
@@ -82,6 +83,7 @@ function renderGifts() {
           <div class="gift-reveal-emoji">${gift.emoji}</div>
           <h3>${gift.name}</h3>
           <p>${gift.content}</p>
+          ${gift.link ? `<a href="${gift.link}" class="gift-link">查看 →</a>` : ''}
         </div>
       </div>
     `;
