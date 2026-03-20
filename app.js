@@ -10,16 +10,16 @@ const GIFTS = [
     name: '菌菇水',
     emoji: '🍄',
     hint: '小朋友最喜欢的什么东西呀',
-    // password: "FJZ2G"
-    hash: '3feaf79adb84502d38c47b0ae78c922cea90d45572153418c3af37d5e374a455',
+    // password: "cici"
+    hash: 'd1b50949dd70f017f7a18e2bc819a9334e918d7ee325055195edec438e9403b1',
     content: '🍄 给我们的小豆最喜欢的呲呲呀 这次要大份一点!'
   },
   {
     name: 'Colofactory',
     emoji: '🎨',
     hint: '开始的开始',
-    // password: "gift2"
-    hash: '95e4bd59a578a46f13e6456c0a68e54aec4f0df1a8c08a847855acf7ef498ccc',
+    // password: "colorfactory"
+    hash: 'a53bb96506c9acb76ce100f5ff8da9f0d8f6146f508a3eee9c1b464371b32e3c',
     content: '🎨 梦开始的地方 <3'
   },
   {
@@ -34,9 +34,9 @@ const GIFTS = [
     name: 'LadyM',
     emoji: '🍰',
     hint: '好吃的',
-    // password: "gift4"
-    hash: '27a8f67e77e33283fd50e7af02d1bbe220282aad2f535c858e3e5678ca0f5dd7',
-    content: '🍰 一起享受美味的LadyM蛋糕吧~'
+    // password: "ladym"
+    hash: '38bdd8bf5a331ed59c2d6a25b2b58630418019a9f40008137be2cb367b74c940',
+    content: '🍰 豆喜欢的千层蛋糕!'
   },
   {
     name: '生日晚宴',
